@@ -1,0 +1,89 @@
+function doublylink(){
+    var length=0;
+    var head=null
+    var tail=null
+    function Node(e){
+        this.elem=e;
+        this.next=null;
+        this.pre=null;
+    }
+
+    this.push=function(e){
+        var node=new Node(e)
+        var current=tail //dingy yi pre
+        if(!head){
+            head=node
+            tail=node
+        }
+        else{
+            current.next=node
+            node.pre=current
+            tail=node
+        }
+        length++
+    }
+    this.pop=function(){
+        var current=tail
+        if(length!==0){
+           tail=current.pre
+            if(length===1){
+               head=null
+            }else
+            {
+                tail.next = null
+            }
+            length--
+        }
+        else
+            return null
+    }
+    this.shift=function(e)
+    {   var node =new Node(e)
+        var current=head
+        if(!head)
+        {
+            head=node
+            tail=node
+        }
+        else {
+        node.next=current
+            current.pre=node
+            head=node
+        }
+        length++
+    }
+    this.unshift=function(){
+        var current=head
+        if(length!==0){
+            head=current.next
+            if(length==1){
+                tail=null
+            }else{
+            head.pre=null
+            }
+            length--
+        }
+
+        else {
+            return null
+        }
+    }
+
+
+this.show=function() {
+    var current = head
+    while (current) {
+        console.log(current.elem);
+        current = current.next
+    }
+}
+}
+var link=new doublylink()
+link.push('is')
+link.shift('teacher')
+link.push('handsome')
+link.show()//显示 teacher is handsome
+link.pop()
+link.show()//显示 teacher is
+link.unshift()
+link.show()//显示 is
